@@ -42,7 +42,8 @@ book:
     
     - part: "Effective Teamwork"
       chapters: 
-      - src/et/lucia-luo.qmd
+      - src/et/macartney-w.qmd
+      - src/et/lucia-l.qmd
 
   appendices:
   - src/appx/proposal.qmd
