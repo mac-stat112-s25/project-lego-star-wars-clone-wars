@@ -34,13 +34,24 @@ book:
     style: "docked"
     pinned: true
     search: true
+  
+  
 
   chapters:
     - index.qmd
+    
+    - part: "Effective Teamwork"
+      chapters: 
+      - src/et/lucia-luo.qmd
 
   appendices:
   - src/appx/proposal.qmd
   - src/appx/case-study.qmd
+  
+
+  
+  
+  
 
 
 
