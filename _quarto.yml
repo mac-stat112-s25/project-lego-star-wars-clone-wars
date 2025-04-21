@@ -34,13 +34,25 @@ book:
     style: "docked"
     pinned: true
     search: true
+  
+  
 
   chapters:
     - index.qmd
+    
+    - part: "Effective Teamwork"
+      chapters: 
+      - src/et/macartney-w.qmd
+      - src/et/lucia-l.qmd
 
   appendices:
   - src/appx/proposal.qmd
   - src/appx/case-study.qmd
+  
+
+  
+  
+  
 
 
 
