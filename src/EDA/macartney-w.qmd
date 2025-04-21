@@ -2,9 +2,51 @@
 title: "macartney-w"
 format: html
 ---
+```{r}
+video_games <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv")
+library(tidyverse)
+library(ggplot2)
+```
 
 ```{r}
+#| fig-height: 3
+#| fig-width: 15
 
+video_games_2 <- video_games |>
+   na.omit() |>
+  separate(release_date, c("Month", "Day", "Year"), sep = " ") |>
+  group_by(developer) |>
+  mutate(games_per_developer = count(developer)) |>
+  filter(games_per_developer > 9) |>
+  arrange(desc(games_per_developer)) 
+
+#add sum of price per dev
+ggplot(video_games_2, aes(x = developer, y = games_per_developer, color = price)) +
+  geom_point()
 
 ```
+```{r}
+#| fig-width: 8
+ggplot(video_games_2, aes(x = Year, fill = developer)) +
+  geom_bar(position = "fill") +
+  scale_fill_viridis_d() 
+```
+```{r}
+ggplot(video_games_2, aes(x = Year, fill = developer)) +
+  geom_bar() +
+  scale_fill_viridis_d() 
+```
+```{r}
+
+month_order <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+video_games_3 <- video_games_2 |>
+  mutate(Month = factor(Month, levels = month_order, ordered = TRUE))
+
+ggplot(video_games_3, aes(x = Month, fill = developer)) +
+  geom_bar() +
+  scale_fill_viridis_d()
+
+```
+
 
