@@ -36,6 +36,7 @@ video_games_deve <- video_games %>%
 # User Interface
 ui <- fluidPage(
   titlePanel("Video Game Developer Analysis"),
+  p("You can explore relationships between different metrics for video game developers. Each point is one game developer"),
   sidebarLayout(
     sidebarPanel(
       selectInput(
@@ -73,6 +74,16 @@ ui <- fluidPage(
         inputId = "show_smooth",
         label = "Show Smooth Trend Line",
         value = FALSE
+      ),
+      checkboxInput(
+        inputId = "show_color",
+        label = "Show color depending on the average metascore",
+        value = FALSE
+      ),
+      checkboxInput(
+        inputId = "show_size",
+        label = "Show size depending on the number of games",
+        value = FALSE
       )
     ),
     mainPanel(
@@ -105,18 +116,28 @@ server <- function(input, output, session) {
                       "avg_time" = "Average Playtime",
                       "med_time" = "Median Playtime")
     
+    point_aes <- aes() # Initialize an empty aesthetic mapping
+    
+    if (input$show_color) {
+      point_aes <- modifyList(point_aes, aes(color = avg_score))
+    }
+    
+    if (input$show_size) {
+      point_aes <- modifyList(point_aes, aes(size = num_games))
+    }
+    
     p <- ggplot(subsetted_data(), aes_string(x = input$x_var, y = input$y_var)) + list(
       theme_minimal(),
       labs(
         title = "Developer Analysis",
         x = x_label,
         y = y_label,
-        color = "Number of Games",
-        size = "Number of Games"
+        color = if (input$show_color) "Average Metascore of Games" else NULL,
+        size = if (input$show_size) "Number of Games" else NULL
       ),
-      geom_point(alpha = 0.7, aes(size = num_games, color = num_games)),
-      scale_size_continuous(range = c(2, 10)),
-      scale_color_viridis_c()
+      geom_point(alpha = 0.6, point_aes),
+      if (input$show_size) scale_size_continuous(range = c(2, 10)),
+      if (input$show_color) scale_color_viridis_c()
     )
     
     if (input$show_smooth) {
