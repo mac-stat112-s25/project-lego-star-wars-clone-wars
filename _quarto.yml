@@ -44,19 +44,13 @@ book:
       chapters: 
       - src/et/macartney-w.qmd
       - src/et/lucia-l.qmd
-      
-    - part: "EDA"
-      chapters: 
-      - src/EDA/lucia-l.qmd
+
 
   appendices:
   - src/appx/proposal.qmd
   - src/appx/case-study.qmd
   
 
-  
-  
-  
 
 
 
