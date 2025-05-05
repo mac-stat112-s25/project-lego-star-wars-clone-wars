@@ -137,7 +137,7 @@ server <- function(input, output, session) {
       ),
       geom_point(alpha = 0.6, point_aes),
       if (input$show_size) scale_size_continuous(range = c(2, 10)),
-      if (input$show_color) scale_color_viridis_c()
+      if (input$show_color) scale_color_viridis_c(option = "plasma")
     )
     
     if (input$show_smooth) {
