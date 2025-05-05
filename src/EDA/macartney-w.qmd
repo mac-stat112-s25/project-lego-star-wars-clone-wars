@@ -3,7 +3,6 @@ title: "macartney-w"
 format: html
 ---
 ```{r}
-
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
@@ -17,19 +16,19 @@ month_order <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", 
 video_games_2 <- video_games |>
    na.omit() |>
   separate(release_date, c("Month", "Day", "Year"), sep = " ") |>
-  mutate(Month = factor(Month, levels = month_order, ordered = TRUE)) |>
-  group_by(developer) |>
-  mutate(games_per_developer = count(developer)) |>
+  mutate(Month = factor(Month, levels = month_order, ordered = TRUE)) 
+
+video_games_3 <- video_games_2 |>
+group_by(developer) |>
+  mutate(games_per_developer = n()) |>
   filter(games_per_developer > 10) |>
   arrange(desc(games_per_developer)) 
 
-video_games_price <- video_games |>
+video_games_price <- video_games_3 |>
    na.omit() |>
-  separate(release_date, c("Month", "Day", "Year"), sep = " ") |>
-  mutate(Month = factor(Month, levels = month_order, ordered = TRUE)) |>
   mutate(avg_price = mean(price)) |>
   group_by(developer) |>
-  mutate(games_per_dev = count(developer)) |>
+  mutate(games_per_dev = n()) |>
   mutate(avg_price_per_dev = mean(price))
 
 
@@ -39,22 +38,11 @@ video_games_price <- video_games |>
 
 ```{r}
 #| fig-width: 9
-ggplot(video_games_2, aes(x = Year, fill = developer)) +
+ggplot(video_games_3, aes(x = Year, fill = developer)) +
   geom_bar() +
   scale_fill_viridis_d() +
   labs(title = "The amount of games produced by top 10 developers.", x = "Year", y = "Amount of games", color = "Developer", caption = "Data from Tidytuesday(2019-07-30)")
 ```
-```{r}
-video_games_meta <-video_games |>
-  na.omit() |>
-  group_by(developer, release_date) |>
-  summarise(avg_avg_meta = mean(metascore))
-
-ggplot(video_games_meta, aes(x = release_date, y = avg_avg_meta)) +
-  geom_line()
-
-  
 
 
-```
 
