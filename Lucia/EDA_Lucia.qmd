@@ -1,5 +1,5 @@
 ---
-title: "Project"
+title: "EDA"
 editor: visual
 ---
 
@@ -13,21 +13,22 @@ library(dplyr)
 library(readr)
 library(viridis)
 
+video_games <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv")
 ```
 
-```{r, include=FALSE}
+```{r}
 #EDA
 head(video_games)
 
 
 
-video_games %>%
-  tableby( ~ ., data = .) %>%
-  summary()
+# video_games %>%
+#   tableby( ~ ., data = .) %>%
+#   summary()
 
 ```
 
-> There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables).
+> There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables). I ran tableby() before, but there are too many things so I didn't show the results.
 
 ```{r}
 #Plots
@@ -42,6 +43,11 @@ video_games_deve <- video_games %>%
   filter(num_games >= 5,
          !is.nan(avg_score),
          !is.na(developer))
+
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ")%>%
+  count(year)
+
 
 #Price vs. score
 video_games_deve %>%
