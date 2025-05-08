@@ -11,8 +11,8 @@ project:
 
 
 book:
-  title: "project title"
-  author: ["student 1 first and last name", "student 2 first and last name", "student 3 first and last name"]
+  title: "Lego Starwars Clone Wars"
+  author: ["Lucia Luo", "Macartney Walker"]
   date: today  # use today to update date published based on last time project was edited
   date-format: full
   # favicon: images/logo.png
