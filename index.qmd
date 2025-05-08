@@ -27,37 +27,6 @@ We found this data set from Tidytuesday, originally this data was collected by L
 
 ## Data Insights
 
-```{r}
-## Motivation
-
-Video games have grown into a dominant field of entertainment. The techniques advances and  increasingly diverse forms facilitate the extension field of video games. As video game players we are interested in exploring the changes and developments of video games in recent years. 
-
-
-
-```
-
-```{r}
-## Research Question
-
-We were investigating what variables affect the price of video games on steam? The variables we used were developer, median and average playtime, metascore, and release date. 
-
-```
-```{r}
-## Back Ground
-
-This data is from Steam Spy which uses an application programming interface (API) to track activity on the gaming platform Steam. Both Steam and Steam Spy are owned by Valve, a game developer and publisher, both Steam and Steam Spy track other games of other developers and publishers. 
-
-The Metascore is a weighted average score of reviews from professional critics that reflects the overall critical reception of a movie, video games or albums. The Metascore is ranging from 0 to 100,  and higher scores indicate more positive reviews. 
-## Data
-
-We found this data set from Tidytuesday, originally this data was collected by Liza Wood using Steam Spy. Steam spy collects data from the games on Steam. This data was collected in July of 2019. The data set includes information for 26688 games, and for each game, there are 10 different variables: the game number, the game title, released date, price in US dollars, the estimate number of people owning this game, company that developed the game, company that published the game, average playtime, median playtime, and Metascore rating. The data is well organized, so we don’t need to clean a lot before exploring. The only concern is the missing data in the cells. 
-
-
-```
-```{r}
-## Data Insights
-
-```
 
 For most of the developers, the average playtimes of their games are around 0, which might be because of the difficulty to record the playtime from the players. There is a positive correlation between the price and average playing time so that we expect the average price of a company’s game would be higher if the average playtime of this company is higher. 
 
@@ -68,13 +37,41 @@ For most of the developers, the average playtimes of their games are around 0, w
 	There is also a positive relationship between average Metascore and average game price of companies. All the companies have average Metascore greater than 40, except one company with average Metascore 23. Interestingly, there is a negative correlation between the average price of a company's games and the number of games a company develops. This means that if a company developed more games, the expectation for the average price of games that this company developed would be lower. We also created a shiny app so that people can explore and play around with the data by themselves!  https://lucialuo040111.shinyapps.io/Shinyapp_Game/
 	
 ```{r}
-# this is a test code
+
 ```
 	
 One interesting finding of our analysis is that there is a significant spike in game price and production in 2012/2013, the increase has steadily continued since. We can also see that since 2012/2013 games are getting more expensive but are being rated less. However, because there are more games being produced the average price of games is going down, this makes sense the total price of games per year is increasing because there are more games produced but the average is going down because of the same increase in games production. Overall there are more games being produced, the total price of games is increasing, but they are not necessarily getting “better”. 
 
 ```{r}
-# this is a test code
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+video_games <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv")
+#| fig-height: 3
+#| fig-width: 15
+month_order <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+video_games_2 <- video_games |>
+   na.omit() |>
+  separate(release_date, c("Month", "Day", "Year"), sep = " ") |>
+  mutate(Month = factor(Month, levels = month_order, ordered = TRUE)) 
+
+video_games_3 <- video_games_2 |>
+group_by(developer) |>
+  mutate(games_per_developer = n()) |>
+  filter(games_per_developer > 10) |>
+  arrange(desc(games_per_developer)) 
+
+video_games_price <- video_games_3 |>
+   na.omit() |>
+  mutate(avg_price = mean(price)) |>
+  group_by(developer) |>
+  mutate(games_per_dev = n()) |>
+  mutate(avg_price_per_dev = mean(price))
+#| fig-width: 9
+ggplot(video_games_3, aes(x = Year, fill = developer)) +
+  geom_bar() +
+  scale_fill_viridis_d() +
+  labs(title = "The amount of games produced by top 10 developers.", x = "Year", y = "Amount of games", color = "Developer", caption = "Data from Tidytuesday(2019-07-30)")
 ```
 
 The plot shows an overall increasing trend of average price of games between 2004 and 2013, especially the remarkable increase from 2012 to 2013. However the price of games dropped significantly after 2013. The average Metascore also decreased after 2013 compared to years between 2004 and 2013. 
