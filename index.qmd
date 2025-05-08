@@ -1,10 +1,22 @@
 ---
 title: "Report"
 execute: 
-  echo: true      # change to true to show the code
+  echo: false      # change to true to show the code
+  warning: false
+  message: false
 code-fold: false  # change to true to fold the code chunks
 number-sections: false
 ---
+
+```{r}
+#Packages and data set
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+video_games <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv")
+
+```
+
 
 ## Motivation
 
@@ -27,27 +39,104 @@ We found this data set from Tidytuesday, originally this data was collected by L
 
 ## Data Insights
 
+```{r}
+video_games_deve <- video_games %>%
+  group_by(developer) %>%
+  summarize(num_games = n(),
+            avg_score = mean(metascore, na.rm = TRUE),
+            avg_price = mean(price, na.rm = TRUE),
+            avg_time = mean(average_playtime, na.rm = TRUE),
+            med_time = mean(median_playtime, na.rm = TRUE))%>%
+  filter(num_games >= 5,
+         !is.nan(avg_score),
+         !is.na(developer))
+
+#| fig-cap: "Each point represent one game developer"
+video_games_deve %>%
+  ggplot(aes(x = avg_time, y = avg_price, size = num_games))+
+  geom_point(alpha = 0.7)+
+  geom_smooth(se = FALSE, method = "lm",color = "red", show.legend = FALSE)+
+  scale_size_continuous(range = c(2, 10))+
+  labs(x = "Average Play Time", 
+       y = "Average Price", 
+       size = "Number of Games",
+       title = "Price relative to Play Time")+
+  theme_minimal()
+```
 
 For most of the developers, the average playtimes of their games are around 0, which might be because of the difficulty to record the playtime from the players. There is a positive correlation between the price and average playing time so that we expect the average price of a company’s game would be higher if the average playtime of this company is higher. 
 
 ```{r}
-# this is a test code
+#| fig-cap: "Each point represent one game developer"
+
+video_games_deve %>%
+  ggplot(aes(x = avg_score, y = avg_price, size = num_games)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(se = FALSE, method = "lm", color = "red", show.legend = FALSE) +
+  scale_size_continuous(range = c(2, 10))+
+  labs(x = "Average Metascore", 
+       y = "Average Price", 
+       size = "Number of Games",
+       title = "Price relative to Metascore") +
+  theme_minimal()
 ```
+
+```{r}
+#| fig-cap: "Each point represent one game developer"
+
+video_games_deve %>%
+  ggplot(aes(x = num_games, y = avg_price, size = num_games)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(se = FALSE, method = "lm", color = "red", show.legend = FALSE) +
+  scale_size_continuous(range = c(2, 10))+
+  labs(x = "Average Metascore", 
+       y = "Average Price", 
+       size = "Number of Games",
+       title = "Price relative to Metascore") +
+  theme_minimal()
+```
+
 
 	There is also a positive relationship between average Metascore and average game price of companies. All the companies have average Metascore greater than 40, except one company with average Metascore 23. Interestingly, there is a negative correlation between the average price of a company's games and the number of games a company develops. This means that if a company developed more games, the expectation for the average price of games that this company developed would be lower. We also created a shiny app so that people can explore and play around with the data by themselves!  https://lucialuo040111.shinyapps.io/Shinyapp_Game/
 	
 ```{r}
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ") %>%
+  group_by(year) %>%
+  summarize(sum_price = sum(price, na.rm = TRUE), .groups = 'drop') %>%
+  na.omit() %>%
+  mutate(year = as.numeric(year)) %>% # Convert year to numeric
+  ggplot(aes(x = year, y = sum_price)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    title = "Total Video Game Price Over Time",
+    x = "Year",
+    y = "Total Price"
+  ) +
+  theme_minimal()
 
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ") %>%
+  group_by(year) %>%
+  summarize(num_games = n(), .groups = 'drop') %>%
+  na.omit() %>%
+  mutate(year = as.numeric(year)) %>% # Convert year to numeric
+  ggplot(aes(x = year, y = num_games)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    title = "Number of Video Games Over Time",
+    x = "Year",
+    y = "Number of Games"
+  ) +
+  theme_minimal()
 ```
 	
 One interesting finding of our analysis is that there is a significant spike in game price and production in 2012/2013, the increase has steadily continued since. We can also see that since 2012/2013 games are getting more expensive but are being rated less. However, because there are more games being produced the average price of games is going down, this makes sense the total price of games per year is increasing because there are more games produced but the average is going down because of the same increase in games production. Overall there are more games being produced, the total price of games is increasing, but they are not necessarily getting “better”. 
 
 ```{r}
-library(tidyverse)
-library(ggplot2)
-library(dplyr)
-video_games <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv")
-#| fig-height: 3
+#| fig-height: 7
 #| fig-width: 15
 month_order <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 video_games_2 <- video_games |>
@@ -71,8 +160,34 @@ video_games_price <- video_games_3 |>
 ggplot(video_games_3, aes(x = Year, fill = developer)) +
   geom_bar() +
   scale_fill_viridis_d() +
-  labs(title = "The amount of games produced by top 10 developers.", x = "Year", y = "Amount of games", color = "Developer", caption = "Data from Tidytuesday(2019-07-30)")
+  labs(title = "The amount of games produced by top 10 developers.", x = "Year", y = "Amount of games", color = "Developer", caption = "Data from Tidytuesday(2019-07-30)")+
+  theme_minimal()
 ```
+
+```{r}
+#| fig-cap: "For each year, we take the average price of games that were released in this year"
+
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ") %>%
+  group_by(year) %>%
+  summarize(avg_price = mean(price, na.rm = TRUE),
+            avg_score = mean(metascore, na.rm = TRUE),
+            .groups = 'drop') %>%
+  na.omit() %>%
+  mutate(year = as.numeric(year)) %>% # Convert year to numeric
+  ggplot(aes(x = year, y = avg_price, color = avg_score)) +
+  geom_point() +
+  geom_line() +
+  scale_color_viridis_c(option = "plasma")+
+  labs(
+    title = "Average Video Game Price Over Time",
+    x = "Year",
+    y = "Average Price",
+    color = "Average Metascore"
+  ) +
+  theme_minimal()
+```
+
 
 The plot shows an overall increasing trend of average price of games between 2004 and 2013, especially the remarkable increase from 2012 to 2013. However the price of games dropped significantly after 2013. The average Metascore also decreased after 2013 compared to years between 2004 and 2013. 
 
