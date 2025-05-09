@@ -203,4 +203,8 @@ Another limitation of our dataset was that the “owners” variable was confusi
 Another limitation is that this dataset is only taking data from steam, therefore the generalizability of this dataset is lower. For example some games are only publisher exclusives and therefore are not on steam. There may be a game publisher who is publishing games exclusively on their own platform and, with its addition to steam, would affect our dataset greatly.
 
 
+Here is our presetation and video that you can look at:
 
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQfHOD6svFeKylnkP_hMibRL-n7M2oPAEskO3JvV8Qjd8Jbo1f8Vmxhm8-vuAe2gtQwb0oVwIoEtko7/pubembed?start=false&loop=false&delayms=3000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+
+[Click here to watch the video](https://www.youtube.com/shorts/9SqLL7U1mr0)
