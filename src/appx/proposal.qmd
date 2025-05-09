@@ -2,4 +2,14 @@
 title: "Proposal"
 ---
 
-Your proposal will go here.
+Title: Analysis on Video Game Price.
+
+Names: Macartney Walker, Lucia Luo
+
+Description: We'll explore the video games dataset that include information for 26,688 different video games. We will focus on the relationship between the release time of the games, Metascore, price, and the publisher.
+
+Reasons: We are both interested in video games.
+
+Plan: Examine the data set, think about our research questions, make some plots, work on ppt and paper. 
+
+

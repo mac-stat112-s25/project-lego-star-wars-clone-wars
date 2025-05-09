@@ -96,8 +96,7 @@ video_games_deve %>%
   theme_minimal()
 ```
 
-
-	There is also a positive relationship between average Metascore and average game price of companies. All the companies have average Metascore greater than 40, except one company with average Metascore 23. Interestingly, there is a negative correlation between the average price of a company's games and the number of games a company develops. This means that if a company developed more games, the expectation for the average price of games that this company developed would be lower. We also created a shiny app so that people can explore and play around with the data by themselves!  https://lucialuo040111.shinyapps.io/Shinyapp_Game/
+There is also a positive relationship between average Metascore and average game price of companies. All the companies have average Metascore greater than 40, except one company with average Metascore 23. Interestingly, there is a negative correlation between the average price of a company's games and the number of games a company develops. This means that if a company developed more games, the expectation for the average price of games that this company developed would be lower. We also created a shiny app so that people can explore and play around with the data by themselves!  [Click here to open the Shiny app](https://lucialuo040111.shinyapps.io/Shinyapp_Game/)
 	
 ```{r}
 video_games %>%
