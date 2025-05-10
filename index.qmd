@@ -194,7 +194,9 @@ The plot shows an overall increasing trend of average price of games between 200
 ## Conclusion
 
 In 2012 Steam Greenlight, a feature that allowed users to vote on which games were to be released on steam, was added to the platform. This meant that more games were able to be released because of the backing by the community. 
-In 2013 Linux came to steam adding a new system to steam and bringing in new players.  
+In 2013 Linux came to steam adding a new system to steam and bringing in new players. These might be the reason why the total amount of game increases rapidly after 2013. 
+
+We can also make the conclusion that the the price of video game is relative to metascore, the number of games a company produced and the average playtime. 
 
 ## Limitations and Future Work
 

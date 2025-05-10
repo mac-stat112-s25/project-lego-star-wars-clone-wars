@@ -1,5 +1,5 @@
 ---
-title: "Lucia L"
+title: "Lucia Luo"
 editor: visual
 ---
 
@@ -28,7 +28,8 @@ head(video_games)
 
 ```
 
-> There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables). I ran tableby() before, but there are too many things so I didn't show the results.
+> There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables).
+> I ran tableby() before, but there are too many things so I didn't show the results.
 
 ```{r}
 #Plots
@@ -94,7 +95,6 @@ video_games_deve %>%
   theme_minimal()
 ```
 
-
 ```{r results = "hide", fig.align='center'}
 #| fig-cap: "Each point represent one game developer"
 
@@ -109,8 +109,6 @@ video_games_deve %>%
        title = "Price relative to Metascore") +
   theme_minimal()
 ```
-
-
 
 ```{r}
 #| fig-cap: "For each year, we take the average price of games that were released in this year"
@@ -137,7 +135,6 @@ video_games %>%
 
 
 ```
-
 
 ```{r}
 video_games %>%
