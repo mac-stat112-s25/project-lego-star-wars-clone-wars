@@ -72,12 +72,12 @@
   {
     "objectID": "src/et/macartney-w.html",
     "href": "src/et/macartney-w.html",
-    "title": "2  Macartney W",
+    "title": "2  Macartney Walker",
     "section": "",
     "text": "Kevan, Mike. “Navigating Teamwork as an Introvert: Strategies for Collaboration.” Linkedin, 04 September 2023, https://www.linkedin.com/pulse/navigating-teamwork-introvert-strategies-mike-kevan. Accessed 10 May 2025.\nIntroverted traits are not necessarily detrimental to teamwork, some can even be assets. Embracing introverted traits can help the team, by letting you work at your best, and help the team, by bringing new teamwork styles. It is important to communicate with those you are working with about your introverted traits so that you can plan and adapt around those traits. This might mean changing how your team works. It is important to be open minded and adaptable.",
     "crumbs": [
       "Effective Teamwork",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Macartney W</span>"
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Macartney Walker</span>"
     ]
   },
   {
@@ -94,12 +94,12 @@
   {
     "objectID": "src/EDA/macartney-w.html",
     "href": "src/EDA/macartney-w.html",
-    "title": "\n4  macartney-w\n",
+    "title": "\n4  Macartney Walker\n",
     "section": "",
     "text": "library(tidyverse)\n\n── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──\n✔ dplyr     1.1.4     ✔ readr     2.1.5\n✔ forcats   1.0.0     ✔ stringr   1.5.1\n✔ ggplot2   3.5.1     ✔ tibble    3.2.1\n✔ lubridate 1.9.4     ✔ tidyr     1.3.1\n✔ purrr     1.0.2     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\nℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors\n\nlibrary(ggplot2)\nlibrary(dplyr)\nvideo_games &lt;- readr::read_csv(\"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv\")\n\nRows: 26688 Columns: 10\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (5): game, release_date, owners, developer, publisher\ndbl (5): number, price, average_playtime, median_playtime, metascore\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nmonth_order &lt;- c(\"Jan\", \"Feb\", \"Mar\", \"Apr\", \"May\", \"Jun\", \"Jul\", \"Aug\", \"Sep\", \"Oct\", \"Nov\", \"Dec\")\nvideo_games_2 &lt;- video_games |&gt;\n   na.omit() |&gt;\n  separate(release_date, c(\"Month\", \"Day\", \"Year\"), sep = \" \") |&gt;\n  mutate(Month = factor(Month, levels = month_order, ordered = TRUE)) \n\nWarning: Expected 3 pieces. Missing pieces filled with `NA` in 8 rows [392, 419, 454,\n482, 503, 507, 512, 1459].\n\nvideo_games_3 &lt;- video_games_2 |&gt;\ngroup_by(developer) |&gt;\n  mutate(games_per_developer = n()) |&gt;\n  filter(games_per_developer &gt; 10) |&gt;\n  arrange(desc(games_per_developer)) \n\nvideo_games_price &lt;- video_games_3 |&gt;\n   na.omit() |&gt;\n  mutate(avg_price = mean(price)) |&gt;\n  group_by(developer) |&gt;\n  mutate(games_per_dev = n()) |&gt;\n  mutate(avg_price_per_dev = mean(price))\n\n\nggplot(video_games_3, aes(x = Year, fill = developer)) +\n  geom_bar() +\n  scale_fill_viridis_d() +\n  labs(title = \"The amount of games produced by top 10 developers.\", x = \"Year\", y = \"Amount of games\", color = \"Developer\", caption = \"Data from Tidytuesday(2019-07-30)\")",
     "crumbs": [
       "EDA",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>macartney-w</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Macartney Walker</span>"
     ]
   },
   {
