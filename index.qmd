@@ -1,5 +1,5 @@
 ---
-title: "Report"
+title: "Are Video Games worth it?"
 execute: 
   echo: false      # change to true to show the code
   warning: false

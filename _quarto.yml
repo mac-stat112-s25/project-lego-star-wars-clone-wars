@@ -11,7 +11,7 @@ project:
 
 
 book:
-  title: "Lego Starwars Clone Wars"
+  title: "Lego Starwars Clone Wars: Are Video Games worth it?"
   author: ["Lucia Luo", "Macartney Walker"]
   date: today  # use today to update date published based on last time project was edited
   date-format: full
