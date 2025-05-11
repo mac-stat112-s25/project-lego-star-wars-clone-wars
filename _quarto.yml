@@ -29,7 +29,7 @@ book:
 
 
   sidebar:
-    title: "sidebar title"
+    title: "Project Lego Starwars Clone Wars"
     collapse-level: 2
     style: "docked"
     pinned: true

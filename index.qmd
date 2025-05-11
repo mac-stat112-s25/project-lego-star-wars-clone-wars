@@ -1,5 +1,5 @@
 ---
-title: "Are Video Games worth it?"
+title: "Report"
 execute: 
   echo: false      # change to true to show the code
   warning: false
@@ -159,9 +159,10 @@ video_games_price <- video_games_3 |>
 ggplot(video_games_3, aes(x = Year, fill = developer)) +
   geom_bar() +
   scale_fill_viridis_d() +
-  labs(title = "The amount of games produced by top 10 developers.", x = "Year", y = "Amount of games", color = "Developer", caption = "Data from Tidytuesday(2019-07-30)")+
+  labs(title = "The amount of games produced by top 10 developers.", x = "Year", y = "Amount of games", color = "Developer", caption = "Data from Tidytuesday(2019-07-30)") +
   theme_minimal()
 ```
+This plot is of the top 10 developers of video games on Steam. This plot is important to our project as it shows us who is developing the most games. In this plot we can see that the top developers of games changed over time, from 2004-2011 Valve and Ubisoft were pretty consistently in the top, however after 2011 companies like Capcom, Daedalic entertainment, and HeR productions were consistently at the top. Another important aspect of this plot is the spike in 2012/2013 which mirrors that of our other plot. We can see that this video game craze that happened in 2012/2013, which affected all of Steam, reached the top developers of games.  
 
 ```{r}
 #| fig-cap: "For each year, we take the average price of games that were released in this year"
