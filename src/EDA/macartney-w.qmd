@@ -1,0 +1,48 @@
+---
+title: "Macartney Walker"
+format: html
+---
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+video_games <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv")
+```
+
+```{r}
+#| fig-height: 3
+#| fig-width: 15
+month_order <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+video_games_2 <- video_games |>
+   na.omit() |>
+  separate(release_date, c("Month", "Day", "Year"), sep = " ") |>
+  mutate(Month = factor(Month, levels = month_order, ordered = TRUE)) 
+
+video_games_3 <- video_games_2 |>
+group_by(developer) |>
+  mutate(games_per_developer = n()) |>
+  filter(games_per_developer > 10) |>
+  arrange(desc(games_per_developer)) 
+
+video_games_price <- video_games_3 |>
+   na.omit() |>
+  mutate(avg_price = mean(price)) |>
+  group_by(developer) |>
+  mutate(games_per_dev = n()) |>
+  mutate(avg_price_per_dev = mean(price))
+
+
+
+```
+
+
+```{r}
+#| fig-width: 9
+ggplot(video_games_3, aes(x = Year, fill = developer)) +
+  geom_bar() +
+  scale_fill_viridis_d() +
+  labs(title = "The amount of games produced by top 10 developers.", x = "Year", y = "Amount of games", color = "Developer", caption = "Data from Tidytuesday(2019-07-30)")
+```
+
+
+

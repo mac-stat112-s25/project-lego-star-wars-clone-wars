@@ -1,0 +1,208 @@
+---
+title: "Lucia Luo"
+editor: visual
+---
+
+```{r}
+library(tidytuesdayR)
+library(tidyverse)
+library(arsenal)
+library(ggplot2)
+library(shiny)
+library(dplyr)
+library(readr)
+library(viridis)
+
+video_games <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv")
+```
+
+```{r}
+#EDA
+head(video_games)
+
+
+
+# video_games %>%
+#   tableby( ~ ., data = .) %>%
+#   summary()
+
+```
+
+> There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables).
+> I ran tableby() before, but there are too many things so I didn't show the results.
+
+```{r}
+#Plots
+
+video_games_deve <- video_games %>%
+  group_by(developer) %>%
+  summarize(num_games = n(),
+            avg_score = mean(metascore, na.rm = TRUE),
+            avg_price = mean(price, na.rm = TRUE),
+            avg_time = mean(average_playtime, na.rm = TRUE),
+            med_time = mean(median_playtime, na.rm = TRUE))%>%
+  filter(num_games >= 5,
+         !is.nan(avg_score),
+         !is.na(developer))
+
+
+
+video_games_deve %>% arrange(avg_score)
+
+#Price vs. score
+video_games_deve %>%
+  ggplot(aes(x = avg_score, y = avg_price, color = num_games))+
+  geom_point()+
+  geom_smooth(se = FALSE, method = "lm",color = "red")+
+  labs(x = "Average Metascore", y = "Average Price", color = "number of games")+
+  theme_minimal()
+
+#Price vs. play time
+video_games_deve %>%
+  ggplot(aes(x = avg_time, y = avg_price, color = num_games))+
+  geom_point()+
+  geom_smooth(se = FALSE, method = "lm",color = "red")+
+  labs(x = "Average Play Time", y = "Average Price", color = "number of games")+
+  theme_minimal()
+  
+
+video_games %>% 
+  na.omit() %>%
+  ggplot(aes(x = price, y = metascore))+
+  geom_point()+
+  geom_smooth()
+
+video_games %>% 
+  filter(average_playtime > 100,
+         !is.na(metascore))%>%
+  ggplot(aes(x = metascore, y = average_playtime))+
+  geom_point()+
+  geom_smooth(se = FALSE, method = "lm")
+
+```
+
+```{r results = "hide", fig.align='center'}
+#| fig-cap: "Each point represent one game developer"
+video_games_deve %>%
+  ggplot(aes(x = avg_time, y = avg_price, size = num_games))+
+  geom_point(alpha = 0.7)+
+  geom_smooth(se = FALSE, method = "lm",color = "red", show.legend = FALSE)+
+  scale_size_continuous(range = c(2, 10))+
+  labs(x = "Average Play Time", 
+       y = "Average Price", 
+       size = "Number of Games",
+       title = "Price relative to Play Time")+
+  theme_minimal()
+```
+
+```{r results = "hide", fig.align='center'}
+#| fig-cap: "Each point represent one game developer"
+
+video_games_deve %>%
+  ggplot(aes(x = avg_score, y = avg_price, size = num_games)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(se = FALSE, method = "lm", color = "red", show.legend = FALSE) +
+  scale_size_continuous(range = c(2, 10))+
+  labs(x = "Average Metascore", 
+       y = "Average Price", 
+       size = "Number of Games",
+       title = "Price relative to Metascore") +
+  theme_minimal()
+```
+
+```{r results = "hide", fig.align='center'}
+#| fig-cap: "Each point represent one game developer"
+
+video_games_deve %>%
+  ggplot(aes(x = num_games, y = avg_price, size = num_games)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(se = FALSE, method = "lm", color = "red", show.legend = FALSE) +
+  scale_size_continuous(range = c(2, 10))+
+  labs(x = "Average Metascore", 
+       y = "Average Price", 
+       size = "Number of Games",
+       title = "Price relative to Metascore") +
+  theme_minimal()
+```
+
+```{r}
+#| fig-cap: "For each year, we take the average price of games that were released in this year"
+
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ") %>%
+  group_by(year) %>%
+  summarize(avg_price = mean(price, na.rm = TRUE),
+            avg_score = mean(metascore, na.rm = TRUE),
+            .groups = 'drop') %>%
+  na.omit() %>%
+  mutate(year = as.numeric(year)) %>% # Convert year to numeric
+  ggplot(aes(x = year, y = avg_price, color = avg_score)) +
+  geom_point() +
+  geom_line() +
+  scale_color_viridis_c(option = "plasma")+
+  labs(
+    title = "Average Video Game Price Over Time",
+    x = "Year",
+    y = "Average Price",
+    color = "Average Metascore"
+  ) +
+  theme_minimal()
+
+
+```
+
+```{r}
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ") %>%
+  group_by(year) %>%
+  summarize(sum_price = sum(price, na.rm = TRUE), .groups = 'drop') %>%
+  na.omit() %>%
+  mutate(year = as.numeric(year)) %>% # Convert year to numeric
+  ggplot(aes(x = year, y = sum_price)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    title = "Total Video Game Price Over Time",
+    x = "Year",
+    y = "Total Price"
+  ) +
+  theme_minimal()
+
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ") %>%
+  group_by(year) %>%
+  summarize(num_games = n(), .groups = 'drop') %>%
+  na.omit() %>%
+  mutate(year = as.numeric(year)) %>% # Convert year to numeric
+  ggplot(aes(x = year, y = num_games)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    title = "Number of Video Games Over Time",
+    x = "Year",
+    y = "Number of Games"
+  ) +
+  theme_minimal()
+
+video_games %>%
+  separate(release_date, c("month_date", "year"), sep = ", ") %>%
+  group_by(year) %>%
+  summarize(num_games = n(),
+            avg_score = mean(metascore, na.rm = TRUE),
+            .groups = 'drop') %>%
+  na.omit() %>%
+  mutate(year = as.numeric(year)) %>% # Convert year to numeric
+  ggplot(aes(x = year, y = avg_score)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    title = "Average Metascore Over Time",
+    x = "Year",
+    y = "Score"
+  ) +
+  theme_minimal()
+
+
+```
+
+> The average price of game decrease since 2013, but the amount of games increased significantly
