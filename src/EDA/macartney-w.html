@@ -135,7 +135,7 @@ cookieconsent.run({
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">sidebar title</a> 
+      <a href="../../">Project Lego Starwars Clone Wars</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -254,22 +254,10 @@ cookieconsent.run({
 
 
 </header><div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>video_games <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="#cb1-4"></a>video_games <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 26688 Columns: 10
 ── Column specification ────────────────────────────────────────────────────────
@@ -282,33 +270,33 @@ dbl (5): number, price, average_playtime, median_playtime, metascore
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>month_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>, <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>video_games_2 <span class="ot">&lt;-</span> video_games <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"Month"</span>, <span class="st">"Day"</span>, <span class="st">"Year"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">factor</span>(Month, <span class="at">levels =</span> month_order, <span class="at">ordered =</span> <span class="cn">TRUE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>month_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>, <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>video_games_2 <span class="ot">&lt;-</span> video_games <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"Month"</span>, <span class="st">"Day"</span>, <span class="st">"Year"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">factor</span>(Month, <span class="at">levels =</span> month_order, <span class="at">ordered =</span> <span class="cn">TRUE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Expected 3 pieces. Missing pieces filled with `NA` in 8 rows [392, 419, 454,
 482, 503, 507, 512, 1459].</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>video_games_3 <span class="ot">&lt;-</span> video_games_2 <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">mutate</span>(<span class="at">games_per_developer =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a>  <span class="fu">filter</span>(games_per_developer <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(games_per_developer)) </span>
-<span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a>video_games_price <span class="ot">&lt;-</span> video_games_3 <span class="sc">|&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a>  <span class="fu">mutate</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price)) <span class="sc">|&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a>  <span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a>  <span class="fu">mutate</span>(<span class="at">games_per_dev =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>  <span class="fu">mutate</span>(<span class="at">avg_price_per_dev =</span> <span class="fu">mean</span>(price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>video_games_3 <span class="ot">&lt;-</span> video_games_2 <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>  <span class="fu">mutate</span>(<span class="at">games_per_developer =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="fu">filter</span>(games_per_developer <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(games_per_developer)) </span>
+<span id="cb5-6"><a href="#cb5-6"></a></span>
+<span id="cb5-7"><a href="#cb5-7"></a>video_games_price <span class="ot">&lt;-</span> video_games_3 <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>  <span class="fu">mutate</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price)) <span class="sc">|&gt;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>  <span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>  <span class="fu">mutate</span>(<span class="at">games_per_dev =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>  <span class="fu">mutate</span>(<span class="at">avg_price_per_dev =</span> <span class="fu">mean</span>(price))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ggplot</span>(video_games_3, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">fill =</span> developer)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The amount of games produced by top 10 developers."</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Amount of games"</span>, <span class="at">color =</span> <span class="st">"Developer"</span>, <span class="at">caption =</span> <span class="st">"Data from Tidytuesday(2019-07-30)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">ggplot</span>(video_games_3, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">fill =</span> developer)) <span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The amount of games produced by top 10 developers."</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Amount of games"</span>, <span class="at">color =</span> <span class="st">"Developer"</span>, <span class="at">caption =</span> <span class="st">"Data from Tidytuesday(2019-07-30)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="macartney-w_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="864"></p>
@@ -951,53 +939,53 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">---</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="an">title:</span><span class="co"> "Macartney Walker"</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="an">format:</span><span class="co"> html</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">---</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="in">```{r}</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb9-11"><a href="#cb9-11"></a>video_games <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv"</span>)</span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="in">```</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="in">```{r}</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#| fig-height: 3</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#| fig-width: 15</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a>month_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>, <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>)</span>
-<span id="cb9-20"><a href="#cb9-20"></a>video_games_2 <span class="ot">&lt;-</span> video_games <span class="sc">|&gt;</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"Month"</span>, <span class="st">"Day"</span>, <span class="st">"Year"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">factor</span>(Month, <span class="at">levels =</span> month_order, <span class="at">ordered =</span> <span class="cn">TRUE</span>)) </span>
-<span id="cb9-24"><a href="#cb9-24"></a></span>
-<span id="cb9-25"><a href="#cb9-25"></a>video_games_3 <span class="ot">&lt;-</span> video_games_2 <span class="sc">|&gt;</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a>  <span class="fu">mutate</span>(<span class="at">games_per_developer =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb9-28"><a href="#cb9-28"></a>  <span class="fu">filter</span>(games_per_developer <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-29"><a href="#cb9-29"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(games_per_developer)) </span>
-<span id="cb9-30"><a href="#cb9-30"></a></span>
-<span id="cb9-31"><a href="#cb9-31"></a>video_games_price <span class="ot">&lt;-</span> video_games_3 <span class="sc">|&gt;</span></span>
-<span id="cb9-32"><a href="#cb9-32"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-33"><a href="#cb9-33"></a>  <span class="fu">mutate</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price)) <span class="sc">|&gt;</span></span>
-<span id="cb9-34"><a href="#cb9-34"></a>  <span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
-<span id="cb9-35"><a href="#cb9-35"></a>  <span class="fu">mutate</span>(<span class="at">games_per_dev =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
-<span id="cb9-36"><a href="#cb9-36"></a>  <span class="fu">mutate</span>(<span class="at">avg_price_per_dev =</span> <span class="fu">mean</span>(price))</span>
-<span id="cb9-37"><a href="#cb9-37"></a></span>
-<span id="cb9-38"><a href="#cb9-38"></a></span>
-<span id="cb9-39"><a href="#cb9-39"></a></span>
-<span id="cb9-40"><a href="#cb9-40"></a><span class="in">```</span></span>
-<span id="cb9-41"><a href="#cb9-41"></a></span>
-<span id="cb9-42"><a href="#cb9-42"></a></span>
-<span id="cb9-45"><a href="#cb9-45"></a><span class="in">```{r}</span></span>
-<span id="cb9-46"><a href="#cb9-46"></a><span class="co">#| fig-width: 9</span></span>
-<span id="cb9-47"><a href="#cb9-47"></a><span class="fu">ggplot</span>(video_games_3, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">fill =</span> developer)) <span class="sc">+</span></span>
-<span id="cb9-48"><a href="#cb9-48"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb9-49"><a href="#cb9-49"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
-<span id="cb9-50"><a href="#cb9-50"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The amount of games produced by top 10 developers."</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Amount of games"</span>, <span class="at">color =</span> <span class="st">"Developer"</span>, <span class="at">caption =</span> <span class="st">"Data from Tidytuesday(2019-07-30)"</span>)</span>
-<span id="cb9-51"><a href="#cb9-51"></a><span class="in">```</span></span>
-<span id="cb9-52"><a href="#cb9-52"></a></span>
-<span id="cb9-53"><a href="#cb9-53"></a></span>
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">---</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="an">title:</span><span class="co"> "Macartney Walker"</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">---</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="in">```{r}</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-11"><a href="#cb7-11"></a>video_games <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="in">```</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="in">```{r}</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#| fig-height: 3</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#| fig-width: 15</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a>month_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Jan"</span>, <span class="st">"Feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>, <span class="st">"May"</span>, <span class="st">"Jun"</span>, <span class="st">"Jul"</span>, <span class="st">"Aug"</span>, <span class="st">"Sep"</span>, <span class="st">"Oct"</span>, <span class="st">"Nov"</span>, <span class="st">"Dec"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20"></a>video_games_2 <span class="ot">&lt;-</span> video_games <span class="sc">|&gt;</span></span>
+<span id="cb7-21"><a href="#cb7-21"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-22"><a href="#cb7-22"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"Month"</span>, <span class="st">"Day"</span>, <span class="st">"Year"</span>), <span class="at">sep =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-23"><a href="#cb7-23"></a>  <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">factor</span>(Month, <span class="at">levels =</span> month_order, <span class="at">ordered =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb7-24"><a href="#cb7-24"></a></span>
+<span id="cb7-25"><a href="#cb7-25"></a>video_games_3 <span class="ot">&lt;-</span> video_games_2 <span class="sc">|&gt;</span></span>
+<span id="cb7-26"><a href="#cb7-26"></a><span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
+<span id="cb7-27"><a href="#cb7-27"></a>  <span class="fu">mutate</span>(<span class="at">games_per_developer =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb7-28"><a href="#cb7-28"></a>  <span class="fu">filter</span>(games_per_developer <span class="sc">&gt;</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-29"><a href="#cb7-29"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(games_per_developer)) </span>
+<span id="cb7-30"><a href="#cb7-30"></a></span>
+<span id="cb7-31"><a href="#cb7-31"></a>video_games_price <span class="ot">&lt;-</span> video_games_3 <span class="sc">|&gt;</span></span>
+<span id="cb7-32"><a href="#cb7-32"></a>   <span class="fu">na.omit</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-33"><a href="#cb7-33"></a>  <span class="fu">mutate</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price)) <span class="sc">|&gt;</span></span>
+<span id="cb7-34"><a href="#cb7-34"></a>  <span class="fu">group_by</span>(developer) <span class="sc">|&gt;</span></span>
+<span id="cb7-35"><a href="#cb7-35"></a>  <span class="fu">mutate</span>(<span class="at">games_per_dev =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb7-36"><a href="#cb7-36"></a>  <span class="fu">mutate</span>(<span class="at">avg_price_per_dev =</span> <span class="fu">mean</span>(price))</span>
+<span id="cb7-37"><a href="#cb7-37"></a></span>
+<span id="cb7-38"><a href="#cb7-38"></a></span>
+<span id="cb7-39"><a href="#cb7-39"></a></span>
+<span id="cb7-40"><a href="#cb7-40"></a><span class="in">```</span></span>
+<span id="cb7-41"><a href="#cb7-41"></a></span>
+<span id="cb7-42"><a href="#cb7-42"></a></span>
+<span id="cb7-45"><a href="#cb7-45"></a><span class="in">```{r}</span></span>
+<span id="cb7-46"><a href="#cb7-46"></a><span class="co">#| fig-width: 9</span></span>
+<span id="cb7-47"><a href="#cb7-47"></a><span class="fu">ggplot</span>(video_games_3, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">fill =</span> developer)) <span class="sc">+</span></span>
+<span id="cb7-48"><a href="#cb7-48"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb7-49"><a href="#cb7-49"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb7-50"><a href="#cb7-50"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"The amount of games produced by top 10 developers."</span>, <span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Amount of games"</span>, <span class="at">color =</span> <span class="st">"Developer"</span>, <span class="at">caption =</span> <span class="st">"Data from Tidytuesday(2019-07-30)"</span>)</span>
+<span id="cb7-51"><a href="#cb7-51"></a><span class="in">```</span></span>
+<span id="cb7-52"><a href="#cb7-52"></a></span>
+<span id="cb7-53"><a href="#cb7-53"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

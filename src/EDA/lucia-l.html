@@ -135,7 +135,7 @@ cookieconsent.run({
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">sidebar title</a> 
+      <a href="../../">Project Lego Starwars Clone Wars</a> 
         <div class="sidebar-tools-main">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
@@ -262,7 +262,7 @@ cookieconsent.run({
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
 ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
+✔ purrr     1.0.4     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -503,26 +503,66 @@ Removed 2 rows containing missing values or values outside the scale range
 </div>
 </div>
 </div>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>video_games_deve <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> num_games, <span class="at">y =</span> avg_price, <span class="at">size =</span> num_games)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">10</span>))<span class="sc">+</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Metascore"</span>, </span>
+<span id="cb36-7"><a href="#cb36-7"></a>       <span class="at">y =</span> <span class="st">"Average Price"</span>, </span>
+<span id="cb36-8"><a href="#cb36-8"></a>       <span class="at">size =</span> <span class="st">"Number of Games"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9"></a>       <span class="at">title =</span> <span class="st">"Price relative to Metascore"</span>) <span class="sc">+</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
+(`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: The following aesthetics were dropped during statistical transformation: size.
+ℹ This can happen when ggplot fails to infer the correct grouping structure in
+  the data.
+ℹ Did you forget to specify a `group` aesthetic or to convert a numerical
+  variable into a factor?</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Each point represent one game developer</figcaption></figure>
+</div>
+</div>
+</div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb36-5"><a href="#cb36-5"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb36-6"><a href="#cb36-6"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb36-8"><a href="#cb36-8"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb36-9"><a href="#cb36-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_price, <span class="at">color =</span> avg_score)) <span class="sc">+</span></span>
-<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb36-11"><a href="#cb36-11"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb36-12"><a href="#cb36-12"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>)<span class="sc">+</span></span>
-<span id="cb36-13"><a href="#cb36-13"></a>  <span class="fu">labs</span>(</span>
-<span id="cb36-14"><a href="#cb36-14"></a>    <span class="at">title =</span> <span class="st">"Average Video Game Price Over Time"</span>,</span>
-<span id="cb36-15"><a href="#cb36-15"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb36-16"><a href="#cb36-16"></a>    <span class="at">y =</span> <span class="st">"Average Price"</span>,</span>
-<span id="cb36-17"><a href="#cb36-17"></a>    <span class="at">color =</span> <span class="st">"Average Metascore"</span></span>
-<span id="cb36-18"><a href="#cb36-18"></a>  ) <span class="sc">+</span></span>
-<span id="cb36-19"><a href="#cb36-19"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb42-5"><a href="#cb42-5"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb42-6"><a href="#cb42-6"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb42-7"><a href="#cb42-7"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb42-8"><a href="#cb42-8"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb42-9"><a href="#cb42-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_price, <span class="at">color =</span> avg_score)) <span class="sc">+</span></span>
+<span id="cb42-10"><a href="#cb42-10"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb42-11"><a href="#cb42-11"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb42-12"><a href="#cb42-12"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>)<span class="sc">+</span></span>
+<span id="cb42-13"><a href="#cb42-13"></a>  <span class="fu">labs</span>(</span>
+<span id="cb42-14"><a href="#cb42-14"></a>    <span class="at">title =</span> <span class="st">"Average Video Game Price Over Time"</span>,</span>
+<span id="cb42-15"><a href="#cb42-15"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb42-16"><a href="#cb42-16"></a>    <span class="at">y =</span> <span class="st">"Average Price"</span>,</span>
+<span id="cb42-17"><a href="#cb42-17"></a>    <span class="at">color =</span> <span class="st">"Average Metascore"</span></span>
+<span id="cb42-18"><a href="#cb42-18"></a>  ) <span class="sc">+</span></span>
+<span id="cb42-19"><a href="#cb42-19"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 41 rows [746, 768, 815,
 856, 930, 975, 996, 1003, 1015, 1021, 1140, 1845, 2590, 3146, 3353, 3887, 3933,
@@ -530,27 +570,27 @@ Removed 2 rows containing missing values or values outside the scale range
 </div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption>For each year, we take the average price of games that were released in this year</figcaption></figure>
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb38-4"><a href="#cb38-4"></a>  <span class="fu">summarize</span>(<span class="at">sum_price =</span> <span class="fu">sum</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb38-5"><a href="#cb38-5"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb38-6"><a href="#cb38-6"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb38-7"><a href="#cb38-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sum_price)) <span class="sc">+</span></span>
-<span id="cb38-8"><a href="#cb38-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb38-9"><a href="#cb38-9"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb38-10"><a href="#cb38-10"></a>  <span class="fu">labs</span>(</span>
-<span id="cb38-11"><a href="#cb38-11"></a>    <span class="at">title =</span> <span class="st">"Total Video Game Price Over Time"</span>,</span>
-<span id="cb38-12"><a href="#cb38-12"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb38-13"><a href="#cb38-13"></a>    <span class="at">y =</span> <span class="st">"Total Price"</span></span>
-<span id="cb38-14"><a href="#cb38-14"></a>  ) <span class="sc">+</span></span>
-<span id="cb38-15"><a href="#cb38-15"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-3"><a href="#cb44-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a>  <span class="fu">summarize</span>(<span class="at">sum_price =</span> <span class="fu">sum</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb44-7"><a href="#cb44-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sum_price)) <span class="sc">+</span></span>
+<span id="cb44-8"><a href="#cb44-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-9"><a href="#cb44-9"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb44-10"><a href="#cb44-10"></a>  <span class="fu">labs</span>(</span>
+<span id="cb44-11"><a href="#cb44-11"></a>    <span class="at">title =</span> <span class="st">"Total Video Game Price Over Time"</span>,</span>
+<span id="cb44-12"><a href="#cb44-12"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb44-13"><a href="#cb44-13"></a>    <span class="at">y =</span> <span class="st">"Total Price"</span></span>
+<span id="cb44-14"><a href="#cb44-14"></a>  ) <span class="sc">+</span></span>
+<span id="cb44-15"><a href="#cb44-15"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 41 rows [746, 768, 815,
 856, 930, 975, 996, 1003, 1015, 1021, 1140, 1845, 2590, 3146, 3353, 3887, 3933,
@@ -558,25 +598,25 @@ Removed 2 rows containing missing values or values outside the scale range
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-3"><a href="#cb40-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb40-4"><a href="#cb40-4"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb40-5"><a href="#cb40-5"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb40-6"><a href="#cb40-6"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb40-7"><a href="#cb40-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> num_games)) <span class="sc">+</span></span>
-<span id="cb40-8"><a href="#cb40-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb40-9"><a href="#cb40-9"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb40-10"><a href="#cb40-10"></a>  <span class="fu">labs</span>(</span>
-<span id="cb40-11"><a href="#cb40-11"></a>    <span class="at">title =</span> <span class="st">"Number of Video Games Over Time"</span>,</span>
-<span id="cb40-12"><a href="#cb40-12"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb40-13"><a href="#cb40-13"></a>    <span class="at">y =</span> <span class="st">"Number of Games"</span></span>
-<span id="cb40-14"><a href="#cb40-14"></a>  ) <span class="sc">+</span></span>
-<span id="cb40-15"><a href="#cb40-15"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-3"><a href="#cb46-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb46-4"><a href="#cb46-4"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb46-5"><a href="#cb46-5"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb46-6"><a href="#cb46-6"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb46-7"><a href="#cb46-7"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> num_games)) <span class="sc">+</span></span>
+<span id="cb46-8"><a href="#cb46-8"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb46-9"><a href="#cb46-9"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb46-10"><a href="#cb46-10"></a>  <span class="fu">labs</span>(</span>
+<span id="cb46-11"><a href="#cb46-11"></a>    <span class="at">title =</span> <span class="st">"Number of Video Games Over Time"</span>,</span>
+<span id="cb46-12"><a href="#cb46-12"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb46-13"><a href="#cb46-13"></a>    <span class="at">y =</span> <span class="st">"Number of Games"</span></span>
+<span id="cb46-14"><a href="#cb46-14"></a>  ) <span class="sc">+</span></span>
+<span id="cb46-15"><a href="#cb46-15"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 41 rows [746, 768, 815,
 856, 930, 975, 996, 1003, 1015, 1021, 1140, 1845, 2590, 3146, 3353, 3887, 3933,
@@ -584,27 +624,27 @@ Removed 2 rows containing missing values or values outside the scale range
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-3"><a href="#cb42-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb42-4"><a href="#cb42-4"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(),</span>
-<span id="cb42-5"><a href="#cb42-5"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb42-6"><a href="#cb42-6"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-7"><a href="#cb42-7"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb42-8"><a href="#cb42-8"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb42-9"><a href="#cb42-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_score)) <span class="sc">+</span></span>
-<span id="cb42-10"><a href="#cb42-10"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb42-11"><a href="#cb42-11"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb42-12"><a href="#cb42-12"></a>  <span class="fu">labs</span>(</span>
-<span id="cb42-13"><a href="#cb42-13"></a>    <span class="at">title =</span> <span class="st">"Average Metascore Over Time"</span>,</span>
-<span id="cb42-14"><a href="#cb42-14"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb42-15"><a href="#cb42-15"></a>    <span class="at">y =</span> <span class="st">"Score"</span></span>
-<span id="cb42-16"><a href="#cb42-16"></a>  ) <span class="sc">+</span></span>
-<span id="cb42-17"><a href="#cb42-17"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb48-2"><a href="#cb48-2"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-3"><a href="#cb48-3"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(),</span>
+<span id="cb48-5"><a href="#cb48-5"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb48-6"><a href="#cb48-6"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb48-7"><a href="#cb48-7"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb48-8"><a href="#cb48-8"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb48-9"><a href="#cb48-9"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_score)) <span class="sc">+</span></span>
+<span id="cb48-10"><a href="#cb48-10"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb48-11"><a href="#cb48-11"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb48-12"><a href="#cb48-12"></a>  <span class="fu">labs</span>(</span>
+<span id="cb48-13"><a href="#cb48-13"></a>    <span class="at">title =</span> <span class="st">"Average Metascore Over Time"</span>,</span>
+<span id="cb48-14"><a href="#cb48-14"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb48-15"><a href="#cb48-15"></a>    <span class="at">y =</span> <span class="st">"Score"</span></span>
+<span id="cb48-16"><a href="#cb48-16"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-17"><a href="#cb48-17"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Expected 2 pieces. Missing pieces filled with `NA` in 41 rows [746, 768, 815,
 856, 930, 975, 996, 1003, 1015, 1021, 1140, 1845, 2590, 3146, 3353, 3887, 3933,
@@ -612,14 +652,9 @@ Removed 2 rows containing missing values or values outside the scale range
 </div>
 <div class="cell-output-display">
 <div>
-<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="672"></p>
+<figure class="figure"><p><img src="lucia-l_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
-</div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="fu">pbeta</span>(<span class="dv">30</span><span class="sc">/</span><span class="dv">50</span>, <span class="dv">38</span><span class="sc">+</span> <span class="dv">1957</span><span class="sc">/</span><span class="dv">3125</span>, <span class="dv">12</span> <span class="sc">+</span> <span class="dv">618</span><span class="sc">/</span><span class="dv">3125</span>) <span class="sc">-</span> <span class="fu">pbeta</span>(<span class="dv">20</span><span class="sc">/</span><span class="dv">50</span>, <span class="dv">38</span><span class="sc">+</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="dv">1957</span><span class="sc">/</span><span class="dv">3125</span>, <span class="dv">12</span> <span class="sc">+</span> <span class="dv">618</span><span class="sc">/</span><span class="dv">3125</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.007113252</code></pre>
 </div>
 </div>
 <blockquote class="blockquote">
@@ -1260,200 +1295,214 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb46" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="#cb46-1"></a><span class="co">---</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a><span class="an">title:</span><span class="co"> "Lucia Luo"</span></span>
-<span id="cb46-3"><a href="#cb46-3"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb46-4"><a href="#cb46-4"></a><span class="co">---</span></span>
-<span id="cb46-5"><a href="#cb46-5"></a></span>
-<span id="cb46-8"><a href="#cb46-8"></a><span class="in">```{r}</span></span>
-<span id="cb46-9"><a href="#cb46-9"></a><span class="fu">library</span>(tidytuesdayR)</span>
-<span id="cb46-10"><a href="#cb46-10"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb46-11"><a href="#cb46-11"></a><span class="fu">library</span>(arsenal)</span>
-<span id="cb46-12"><a href="#cb46-12"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb46-13"><a href="#cb46-13"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb46-14"><a href="#cb46-14"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb46-15"><a href="#cb46-15"></a><span class="fu">library</span>(readr)</span>
-<span id="cb46-16"><a href="#cb46-16"></a><span class="fu">library</span>(viridis)</span>
-<span id="cb46-17"><a href="#cb46-17"></a></span>
-<span id="cb46-18"><a href="#cb46-18"></a>video_games <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv"</span>)</span>
-<span id="cb46-19"><a href="#cb46-19"></a><span class="in">```</span></span>
-<span id="cb46-20"><a href="#cb46-20"></a></span>
-<span id="cb46-23"><a href="#cb46-23"></a><span class="in">```{r}</span></span>
-<span id="cb46-24"><a href="#cb46-24"></a><span class="co">#EDA</span></span>
-<span id="cb46-25"><a href="#cb46-25"></a><span class="fu">head</span>(video_games)</span>
-<span id="cb46-26"><a href="#cb46-26"></a></span>
-<span id="cb46-27"><a href="#cb46-27"></a></span>
-<span id="cb46-28"><a href="#cb46-28"></a></span>
-<span id="cb46-29"><a href="#cb46-29"></a><span class="co"># video_games %&gt;%</span></span>
-<span id="cb46-30"><a href="#cb46-30"></a><span class="co">#   tableby( ~ ., data = .) %&gt;%</span></span>
-<span id="cb46-31"><a href="#cb46-31"></a><span class="co">#   summary()</span></span>
-<span id="cb46-32"><a href="#cb46-32"></a></span>
-<span id="cb46-33"><a href="#cb46-33"></a><span class="in">```</span></span>
-<span id="cb46-34"><a href="#cb46-34"></a></span>
-<span id="cb46-35"><a href="#cb46-35"></a><span class="at">&gt; There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables).</span></span>
-<span id="cb46-36"><a href="#cb46-36"></a><span class="at">&gt; I ran tableby() before, but there are too many things so I didn't show the results.</span></span>
-<span id="cb46-37"><a href="#cb46-37"></a></span>
-<span id="cb46-40"><a href="#cb46-40"></a><span class="in">```{r}</span></span>
-<span id="cb46-41"><a href="#cb46-41"></a><span class="co">#Plots</span></span>
-<span id="cb46-42"><a href="#cb46-42"></a></span>
-<span id="cb46-43"><a href="#cb46-43"></a>video_games_deve <span class="ot">&lt;-</span> video_games <span class="sc">%&gt;%</span></span>
-<span id="cb46-44"><a href="#cb46-44"></a>  <span class="fu">group_by</span>(developer) <span class="sc">%&gt;%</span></span>
-<span id="cb46-45"><a href="#cb46-45"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(),</span>
-<span id="cb46-46"><a href="#cb46-46"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb46-47"><a href="#cb46-47"></a>            <span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb46-48"><a href="#cb46-48"></a>            <span class="at">avg_time =</span> <span class="fu">mean</span>(average_playtime, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb46-49"><a href="#cb46-49"></a>            <span class="at">med_time =</span> <span class="fu">mean</span>(median_playtime, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb46-50"><a href="#cb46-50"></a>  <span class="fu">filter</span>(num_games <span class="sc">&gt;=</span> <span class="dv">5</span>,</span>
-<span id="cb46-51"><a href="#cb46-51"></a>         <span class="sc">!</span><span class="fu">is.nan</span>(avg_score),</span>
-<span id="cb46-52"><a href="#cb46-52"></a>         <span class="sc">!</span><span class="fu">is.na</span>(developer))</span>
-<span id="cb46-53"><a href="#cb46-53"></a></span>
-<span id="cb46-54"><a href="#cb46-54"></a></span>
-<span id="cb46-55"><a href="#cb46-55"></a></span>
-<span id="cb46-56"><a href="#cb46-56"></a>video_games_deve <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(avg_score)</span>
-<span id="cb46-57"><a href="#cb46-57"></a></span>
-<span id="cb46-58"><a href="#cb46-58"></a><span class="co">#Price vs. score</span></span>
-<span id="cb46-59"><a href="#cb46-59"></a>video_games_deve <span class="sc">%&gt;%</span></span>
-<span id="cb46-60"><a href="#cb46-60"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_score, <span class="at">y =</span> avg_price, <span class="at">color =</span> num_games))<span class="sc">+</span></span>
-<span id="cb46-61"><a href="#cb46-61"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb46-62"><a href="#cb46-62"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>,<span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
-<span id="cb46-63"><a href="#cb46-63"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Metascore"</span>, <span class="at">y =</span> <span class="st">"Average Price"</span>, <span class="at">color =</span> <span class="st">"number of games"</span>)<span class="sc">+</span></span>
-<span id="cb46-64"><a href="#cb46-64"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb46-65"><a href="#cb46-65"></a></span>
-<span id="cb46-66"><a href="#cb46-66"></a><span class="co">#Price vs. play time</span></span>
-<span id="cb46-67"><a href="#cb46-67"></a>video_games_deve <span class="sc">%&gt;%</span></span>
-<span id="cb46-68"><a href="#cb46-68"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_time, <span class="at">y =</span> avg_price, <span class="at">color =</span> num_games))<span class="sc">+</span></span>
-<span id="cb46-69"><a href="#cb46-69"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb46-70"><a href="#cb46-70"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>,<span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
-<span id="cb46-71"><a href="#cb46-71"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Play Time"</span>, <span class="at">y =</span> <span class="st">"Average Price"</span>, <span class="at">color =</span> <span class="st">"number of games"</span>)<span class="sc">+</span></span>
-<span id="cb46-72"><a href="#cb46-72"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb46-73"><a href="#cb46-73"></a>  </span>
-<span id="cb46-74"><a href="#cb46-74"></a></span>
-<span id="cb46-75"><a href="#cb46-75"></a>video_games <span class="sc">%&gt;%</span> </span>
-<span id="cb46-76"><a href="#cb46-76"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-77"><a href="#cb46-77"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> price, <span class="at">y =</span> metascore))<span class="sc">+</span></span>
-<span id="cb46-78"><a href="#cb46-78"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb46-79"><a href="#cb46-79"></a>  <span class="fu">geom_smooth</span>()</span>
-<span id="cb46-80"><a href="#cb46-80"></a></span>
-<span id="cb46-81"><a href="#cb46-81"></a>video_games <span class="sc">%&gt;%</span> </span>
-<span id="cb46-82"><a href="#cb46-82"></a>  <span class="fu">filter</span>(average_playtime <span class="sc">&gt;</span> <span class="dv">100</span>,</span>
-<span id="cb46-83"><a href="#cb46-83"></a>         <span class="sc">!</span><span class="fu">is.na</span>(metascore))<span class="sc">%&gt;%</span></span>
-<span id="cb46-84"><a href="#cb46-84"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> metascore, <span class="at">y =</span> average_playtime))<span class="sc">+</span></span>
-<span id="cb46-85"><a href="#cb46-85"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb46-86"><a href="#cb46-86"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>)</span>
-<span id="cb46-87"><a href="#cb46-87"></a></span>
-<span id="cb46-88"><a href="#cb46-88"></a><span class="in">```</span></span>
-<span id="cb46-89"><a href="#cb46-89"></a></span>
-<span id="cb46-90"><a href="#cb46-90"></a><span class="in">```{r results = "hide", fig.align='center'}</span></span>
-<span id="cb46-91"><a href="#cb46-91"></a><span class="in">#| fig-cap: "Each point represent one game developer"</span></span>
-<span id="cb46-92"><a href="#cb46-92"></a><span class="in">video_games_deve %&gt;%</span></span>
-<span id="cb46-93"><a href="#cb46-93"></a><span class="in">  ggplot(aes(x = avg_time, y = avg_price, size = num_games))+</span></span>
-<span id="cb46-94"><a href="#cb46-94"></a><span class="in">  geom_point(alpha = 0.7)+</span></span>
-<span id="cb46-95"><a href="#cb46-95"></a><span class="in">  geom_smooth(se = FALSE, method = "lm",color = "red", show.legend = FALSE)+</span></span>
-<span id="cb46-96"><a href="#cb46-96"></a><span class="in">  scale_size_continuous(range = c(2, 10))+</span></span>
-<span id="cb46-97"><a href="#cb46-97"></a><span class="in">  labs(x = "Average Play Time", </span></span>
-<span id="cb46-98"><a href="#cb46-98"></a><span class="in">       y = "Average Price", </span></span>
-<span id="cb46-99"><a href="#cb46-99"></a><span class="in">       size = "Number of Games",</span></span>
-<span id="cb46-100"><a href="#cb46-100"></a><span class="in">       title = "Price relative to Play Time")+</span></span>
-<span id="cb46-101"><a href="#cb46-101"></a><span class="in">  theme_minimal()</span></span>
-<span id="cb46-102"><a href="#cb46-102"></a><span class="in">```</span></span>
-<span id="cb46-103"><a href="#cb46-103"></a></span>
-<span id="cb46-104"><a href="#cb46-104"></a><span class="in">```{r results = "hide", fig.align='center'}</span></span>
-<span id="cb46-105"><a href="#cb46-105"></a><span class="in">#| fig-cap: "Each point represent one game developer"</span></span>
-<span id="cb46-106"><a href="#cb46-106"></a></span>
-<span id="cb46-107"><a href="#cb46-107"></a><span class="in">video_games_deve %&gt;%</span></span>
-<span id="cb46-108"><a href="#cb46-108"></a><span class="in">  ggplot(aes(x = avg_score, y = avg_price, size = num_games)) +</span></span>
-<span id="cb46-109"><a href="#cb46-109"></a><span class="in">  geom_point(alpha = 0.7) +</span></span>
-<span id="cb46-110"><a href="#cb46-110"></a><span class="in">  geom_smooth(se = FALSE, method = "lm", color = "red", show.legend = FALSE) +</span></span>
-<span id="cb46-111"><a href="#cb46-111"></a><span class="in">  scale_size_continuous(range = c(2, 10))+</span></span>
-<span id="cb46-112"><a href="#cb46-112"></a><span class="in">  labs(x = "Average Metascore", </span></span>
-<span id="cb46-113"><a href="#cb46-113"></a><span class="in">       y = "Average Price", </span></span>
-<span id="cb46-114"><a href="#cb46-114"></a><span class="in">       size = "Number of Games",</span></span>
-<span id="cb46-115"><a href="#cb46-115"></a><span class="in">       title = "Price relative to Metascore") +</span></span>
-<span id="cb46-116"><a href="#cb46-116"></a><span class="in">  theme_minimal()</span></span>
-<span id="cb46-117"><a href="#cb46-117"></a><span class="in">```</span></span>
-<span id="cb46-118"><a href="#cb46-118"></a></span>
-<span id="cb46-121"><a href="#cb46-121"></a><span class="in">```{r}</span></span>
-<span id="cb46-122"><a href="#cb46-122"></a><span class="co">#| fig-cap: "For each year, we take the average price of games that were released in this year"</span></span>
-<span id="cb46-123"><a href="#cb46-123"></a></span>
-<span id="cb46-124"><a href="#cb46-124"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb46-125"><a href="#cb46-125"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-126"><a href="#cb46-126"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb46-127"><a href="#cb46-127"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb46-128"><a href="#cb46-128"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb46-129"><a href="#cb46-129"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-130"><a href="#cb46-130"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-131"><a href="#cb46-131"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb46-132"><a href="#cb46-132"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_price, <span class="at">color =</span> avg_score)) <span class="sc">+</span></span>
-<span id="cb46-133"><a href="#cb46-133"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb46-134"><a href="#cb46-134"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb46-135"><a href="#cb46-135"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>)<span class="sc">+</span></span>
-<span id="cb46-136"><a href="#cb46-136"></a>  <span class="fu">labs</span>(</span>
-<span id="cb46-137"><a href="#cb46-137"></a>    <span class="at">title =</span> <span class="st">"Average Video Game Price Over Time"</span>,</span>
-<span id="cb46-138"><a href="#cb46-138"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb46-139"><a href="#cb46-139"></a>    <span class="at">y =</span> <span class="st">"Average Price"</span>,</span>
-<span id="cb46-140"><a href="#cb46-140"></a>    <span class="at">color =</span> <span class="st">"Average Metascore"</span></span>
-<span id="cb46-141"><a href="#cb46-141"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-142"><a href="#cb46-142"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb46-143"><a href="#cb46-143"></a></span>
-<span id="cb46-144"><a href="#cb46-144"></a></span>
-<span id="cb46-145"><a href="#cb46-145"></a><span class="in">```</span></span>
-<span id="cb46-146"><a href="#cb46-146"></a></span>
-<span id="cb46-149"><a href="#cb46-149"></a><span class="in">```{r}</span></span>
-<span id="cb46-150"><a href="#cb46-150"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb46-151"><a href="#cb46-151"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-152"><a href="#cb46-152"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb46-153"><a href="#cb46-153"></a>  <span class="fu">summarize</span>(<span class="at">sum_price =</span> <span class="fu">sum</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-154"><a href="#cb46-154"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-155"><a href="#cb46-155"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb46-156"><a href="#cb46-156"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sum_price)) <span class="sc">+</span></span>
-<span id="cb46-157"><a href="#cb46-157"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb46-158"><a href="#cb46-158"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb46-159"><a href="#cb46-159"></a>  <span class="fu">labs</span>(</span>
-<span id="cb46-160"><a href="#cb46-160"></a>    <span class="at">title =</span> <span class="st">"Total Video Game Price Over Time"</span>,</span>
-<span id="cb46-161"><a href="#cb46-161"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb46-162"><a href="#cb46-162"></a>    <span class="at">y =</span> <span class="st">"Total Price"</span></span>
-<span id="cb46-163"><a href="#cb46-163"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-164"><a href="#cb46-164"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb46-165"><a href="#cb46-165"></a></span>
-<span id="cb46-166"><a href="#cb46-166"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb46-167"><a href="#cb46-167"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-168"><a href="#cb46-168"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb46-169"><a href="#cb46-169"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-170"><a href="#cb46-170"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-171"><a href="#cb46-171"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb46-172"><a href="#cb46-172"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> num_games)) <span class="sc">+</span></span>
-<span id="cb46-173"><a href="#cb46-173"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb46-174"><a href="#cb46-174"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb46-175"><a href="#cb46-175"></a>  <span class="fu">labs</span>(</span>
-<span id="cb46-176"><a href="#cb46-176"></a>    <span class="at">title =</span> <span class="st">"Number of Video Games Over Time"</span>,</span>
-<span id="cb46-177"><a href="#cb46-177"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb46-178"><a href="#cb46-178"></a>    <span class="at">y =</span> <span class="st">"Number of Games"</span></span>
-<span id="cb46-179"><a href="#cb46-179"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-180"><a href="#cb46-180"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb46-181"><a href="#cb46-181"></a></span>
-<span id="cb46-182"><a href="#cb46-182"></a>video_games <span class="sc">%&gt;%</span></span>
-<span id="cb46-183"><a href="#cb46-183"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-184"><a href="#cb46-184"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
-<span id="cb46-185"><a href="#cb46-185"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(),</span>
-<span id="cb46-186"><a href="#cb46-186"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb46-187"><a href="#cb46-187"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb46-188"><a href="#cb46-188"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb46-189"><a href="#cb46-189"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
-<span id="cb46-190"><a href="#cb46-190"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_score)) <span class="sc">+</span></span>
-<span id="cb46-191"><a href="#cb46-191"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb46-192"><a href="#cb46-192"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb46-193"><a href="#cb46-193"></a>  <span class="fu">labs</span>(</span>
-<span id="cb46-194"><a href="#cb46-194"></a>    <span class="at">title =</span> <span class="st">"Average Metascore Over Time"</span>,</span>
-<span id="cb46-195"><a href="#cb46-195"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb46-196"><a href="#cb46-196"></a>    <span class="at">y =</span> <span class="st">"Score"</span></span>
-<span id="cb46-197"><a href="#cb46-197"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-198"><a href="#cb46-198"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb46-199"><a href="#cb46-199"></a></span>
-<span id="cb46-200"><a href="#cb46-200"></a><span class="fu">pbeta</span>(<span class="dv">30</span><span class="sc">/</span><span class="dv">50</span>, <span class="dv">38</span><span class="sc">+</span> <span class="dv">1957</span><span class="sc">/</span><span class="dv">3125</span>, <span class="dv">12</span> <span class="sc">+</span> <span class="dv">618</span><span class="sc">/</span><span class="dv">3125</span>) <span class="sc">-</span> <span class="fu">pbeta</span>(<span class="dv">20</span><span class="sc">/</span><span class="dv">50</span>, <span class="dv">38</span><span class="sc">+</span></span>
-<span id="cb46-201"><a href="#cb46-201"></a><span class="dv">1957</span><span class="sc">/</span><span class="dv">3125</span>, <span class="dv">12</span> <span class="sc">+</span> <span class="dv">618</span><span class="sc">/</span><span class="dv">3125</span>)</span>
-<span id="cb46-202"><a href="#cb46-202"></a><span class="in">```</span></span>
-<span id="cb46-203"><a href="#cb46-203"></a></span>
-<span id="cb46-204"><a href="#cb46-204"></a><span class="at">&gt; The average price of game decrease since 2013, but the amount of games increased significantly</span></span>
+<div class="sourceCode" id="cb50" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb50-1"><a href="#cb50-1"></a><span class="co">---</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a><span class="an">title:</span><span class="co"> "Lucia Luo"</span></span>
+<span id="cb50-3"><a href="#cb50-3"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb50-4"><a href="#cb50-4"></a><span class="co">---</span></span>
+<span id="cb50-5"><a href="#cb50-5"></a></span>
+<span id="cb50-8"><a href="#cb50-8"></a><span class="in">```{r}</span></span>
+<span id="cb50-9"><a href="#cb50-9"></a><span class="fu">library</span>(tidytuesdayR)</span>
+<span id="cb50-10"><a href="#cb50-10"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb50-11"><a href="#cb50-11"></a><span class="fu">library</span>(arsenal)</span>
+<span id="cb50-12"><a href="#cb50-12"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb50-13"><a href="#cb50-13"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb50-14"><a href="#cb50-14"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb50-15"><a href="#cb50-15"></a><span class="fu">library</span>(readr)</span>
+<span id="cb50-16"><a href="#cb50-16"></a><span class="fu">library</span>(viridis)</span>
+<span id="cb50-17"><a href="#cb50-17"></a></span>
+<span id="cb50-18"><a href="#cb50-18"></a>video_games <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2019/2019-07-30/video_games.csv"</span>)</span>
+<span id="cb50-19"><a href="#cb50-19"></a><span class="in">```</span></span>
+<span id="cb50-20"><a href="#cb50-20"></a></span>
+<span id="cb50-23"><a href="#cb50-23"></a><span class="in">```{r}</span></span>
+<span id="cb50-24"><a href="#cb50-24"></a><span class="co">#EDA</span></span>
+<span id="cb50-25"><a href="#cb50-25"></a><span class="fu">head</span>(video_games)</span>
+<span id="cb50-26"><a href="#cb50-26"></a></span>
+<span id="cb50-27"><a href="#cb50-27"></a></span>
+<span id="cb50-28"><a href="#cb50-28"></a></span>
+<span id="cb50-29"><a href="#cb50-29"></a><span class="co"># video_games %&gt;%</span></span>
+<span id="cb50-30"><a href="#cb50-30"></a><span class="co">#   tableby( ~ ., data = .) %&gt;%</span></span>
+<span id="cb50-31"><a href="#cb50-31"></a><span class="co">#   summary()</span></span>
+<span id="cb50-32"><a href="#cb50-32"></a></span>
+<span id="cb50-33"><a href="#cb50-33"></a><span class="in">```</span></span>
+<span id="cb50-34"><a href="#cb50-34"></a></span>
+<span id="cb50-35"><a href="#cb50-35"></a><span class="at">&gt; There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables).</span></span>
+<span id="cb50-36"><a href="#cb50-36"></a><span class="at">&gt; I ran tableby() before, but there are too many things so I didn't show the results.</span></span>
+<span id="cb50-37"><a href="#cb50-37"></a></span>
+<span id="cb50-40"><a href="#cb50-40"></a><span class="in">```{r}</span></span>
+<span id="cb50-41"><a href="#cb50-41"></a><span class="co">#Plots</span></span>
+<span id="cb50-42"><a href="#cb50-42"></a></span>
+<span id="cb50-43"><a href="#cb50-43"></a>video_games_deve <span class="ot">&lt;-</span> video_games <span class="sc">%&gt;%</span></span>
+<span id="cb50-44"><a href="#cb50-44"></a>  <span class="fu">group_by</span>(developer) <span class="sc">%&gt;%</span></span>
+<span id="cb50-45"><a href="#cb50-45"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(),</span>
+<span id="cb50-46"><a href="#cb50-46"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-47"><a href="#cb50-47"></a>            <span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-48"><a href="#cb50-48"></a>            <span class="at">avg_time =</span> <span class="fu">mean</span>(average_playtime, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-49"><a href="#cb50-49"></a>            <span class="at">med_time =</span> <span class="fu">mean</span>(median_playtime, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb50-50"><a href="#cb50-50"></a>  <span class="fu">filter</span>(num_games <span class="sc">&gt;=</span> <span class="dv">5</span>,</span>
+<span id="cb50-51"><a href="#cb50-51"></a>         <span class="sc">!</span><span class="fu">is.nan</span>(avg_score),</span>
+<span id="cb50-52"><a href="#cb50-52"></a>         <span class="sc">!</span><span class="fu">is.na</span>(developer))</span>
+<span id="cb50-53"><a href="#cb50-53"></a></span>
+<span id="cb50-54"><a href="#cb50-54"></a></span>
+<span id="cb50-55"><a href="#cb50-55"></a></span>
+<span id="cb50-56"><a href="#cb50-56"></a>video_games_deve <span class="sc">%&gt;%</span> <span class="fu">arrange</span>(avg_score)</span>
+<span id="cb50-57"><a href="#cb50-57"></a></span>
+<span id="cb50-58"><a href="#cb50-58"></a><span class="co">#Price vs. score</span></span>
+<span id="cb50-59"><a href="#cb50-59"></a>video_games_deve <span class="sc">%&gt;%</span></span>
+<span id="cb50-60"><a href="#cb50-60"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_score, <span class="at">y =</span> avg_price, <span class="at">color =</span> num_games))<span class="sc">+</span></span>
+<span id="cb50-61"><a href="#cb50-61"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb50-62"><a href="#cb50-62"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>,<span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
+<span id="cb50-63"><a href="#cb50-63"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Metascore"</span>, <span class="at">y =</span> <span class="st">"Average Price"</span>, <span class="at">color =</span> <span class="st">"number of games"</span>)<span class="sc">+</span></span>
+<span id="cb50-64"><a href="#cb50-64"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb50-65"><a href="#cb50-65"></a></span>
+<span id="cb50-66"><a href="#cb50-66"></a><span class="co">#Price vs. play time</span></span>
+<span id="cb50-67"><a href="#cb50-67"></a>video_games_deve <span class="sc">%&gt;%</span></span>
+<span id="cb50-68"><a href="#cb50-68"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> avg_time, <span class="at">y =</span> avg_price, <span class="at">color =</span> num_games))<span class="sc">+</span></span>
+<span id="cb50-69"><a href="#cb50-69"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb50-70"><a href="#cb50-70"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>,<span class="at">color =</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
+<span id="cb50-71"><a href="#cb50-71"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average Play Time"</span>, <span class="at">y =</span> <span class="st">"Average Price"</span>, <span class="at">color =</span> <span class="st">"number of games"</span>)<span class="sc">+</span></span>
+<span id="cb50-72"><a href="#cb50-72"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb50-73"><a href="#cb50-73"></a>  </span>
+<span id="cb50-74"><a href="#cb50-74"></a></span>
+<span id="cb50-75"><a href="#cb50-75"></a>video_games <span class="sc">%&gt;%</span> </span>
+<span id="cb50-76"><a href="#cb50-76"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-77"><a href="#cb50-77"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> price, <span class="at">y =</span> metascore))<span class="sc">+</span></span>
+<span id="cb50-78"><a href="#cb50-78"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb50-79"><a href="#cb50-79"></a>  <span class="fu">geom_smooth</span>()</span>
+<span id="cb50-80"><a href="#cb50-80"></a></span>
+<span id="cb50-81"><a href="#cb50-81"></a>video_games <span class="sc">%&gt;%</span> </span>
+<span id="cb50-82"><a href="#cb50-82"></a>  <span class="fu">filter</span>(average_playtime <span class="sc">&gt;</span> <span class="dv">100</span>,</span>
+<span id="cb50-83"><a href="#cb50-83"></a>         <span class="sc">!</span><span class="fu">is.na</span>(metascore))<span class="sc">%&gt;%</span></span>
+<span id="cb50-84"><a href="#cb50-84"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> metascore, <span class="at">y =</span> average_playtime))<span class="sc">+</span></span>
+<span id="cb50-85"><a href="#cb50-85"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb50-86"><a href="#cb50-86"></a>  <span class="fu">geom_smooth</span>(<span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">method =</span> <span class="st">"lm"</span>)</span>
+<span id="cb50-87"><a href="#cb50-87"></a></span>
+<span id="cb50-88"><a href="#cb50-88"></a><span class="in">```</span></span>
+<span id="cb50-89"><a href="#cb50-89"></a></span>
+<span id="cb50-90"><a href="#cb50-90"></a><span class="in">```{r results = "hide", fig.align='center'}</span></span>
+<span id="cb50-91"><a href="#cb50-91"></a><span class="in">#| fig-cap: "Each point represent one game developer"</span></span>
+<span id="cb50-92"><a href="#cb50-92"></a><span class="in">video_games_deve %&gt;%</span></span>
+<span id="cb50-93"><a href="#cb50-93"></a><span class="in">  ggplot(aes(x = avg_time, y = avg_price, size = num_games))+</span></span>
+<span id="cb50-94"><a href="#cb50-94"></a><span class="in">  geom_point(alpha = 0.7)+</span></span>
+<span id="cb50-95"><a href="#cb50-95"></a><span class="in">  geom_smooth(se = FALSE, method = "lm",color = "red", show.legend = FALSE)+</span></span>
+<span id="cb50-96"><a href="#cb50-96"></a><span class="in">  scale_size_continuous(range = c(2, 10))+</span></span>
+<span id="cb50-97"><a href="#cb50-97"></a><span class="in">  labs(x = "Average Play Time", </span></span>
+<span id="cb50-98"><a href="#cb50-98"></a><span class="in">       y = "Average Price", </span></span>
+<span id="cb50-99"><a href="#cb50-99"></a><span class="in">       size = "Number of Games",</span></span>
+<span id="cb50-100"><a href="#cb50-100"></a><span class="in">       title = "Price relative to Play Time")+</span></span>
+<span id="cb50-101"><a href="#cb50-101"></a><span class="in">  theme_minimal()</span></span>
+<span id="cb50-102"><a href="#cb50-102"></a><span class="in">```</span></span>
+<span id="cb50-103"><a href="#cb50-103"></a></span>
+<span id="cb50-104"><a href="#cb50-104"></a><span class="in">```{r results = "hide", fig.align='center'}</span></span>
+<span id="cb50-105"><a href="#cb50-105"></a><span class="in">#| fig-cap: "Each point represent one game developer"</span></span>
+<span id="cb50-106"><a href="#cb50-106"></a></span>
+<span id="cb50-107"><a href="#cb50-107"></a><span class="in">video_games_deve %&gt;%</span></span>
+<span id="cb50-108"><a href="#cb50-108"></a><span class="in">  ggplot(aes(x = avg_score, y = avg_price, size = num_games)) +</span></span>
+<span id="cb50-109"><a href="#cb50-109"></a><span class="in">  geom_point(alpha = 0.7) +</span></span>
+<span id="cb50-110"><a href="#cb50-110"></a><span class="in">  geom_smooth(se = FALSE, method = "lm", color = "red", show.legend = FALSE) +</span></span>
+<span id="cb50-111"><a href="#cb50-111"></a><span class="in">  scale_size_continuous(range = c(2, 10))+</span></span>
+<span id="cb50-112"><a href="#cb50-112"></a><span class="in">  labs(x = "Average Metascore", </span></span>
+<span id="cb50-113"><a href="#cb50-113"></a><span class="in">       y = "Average Price", </span></span>
+<span id="cb50-114"><a href="#cb50-114"></a><span class="in">       size = "Number of Games",</span></span>
+<span id="cb50-115"><a href="#cb50-115"></a><span class="in">       title = "Price relative to Metascore") +</span></span>
+<span id="cb50-116"><a href="#cb50-116"></a><span class="in">  theme_minimal()</span></span>
+<span id="cb50-117"><a href="#cb50-117"></a><span class="in">```</span></span>
+<span id="cb50-118"><a href="#cb50-118"></a></span>
+<span id="cb50-119"><a href="#cb50-119"></a><span class="in">```{r results = "hide", fig.align='center'}</span></span>
+<span id="cb50-120"><a href="#cb50-120"></a><span class="in">#| fig-cap: "Each point represent one game developer"</span></span>
+<span id="cb50-121"><a href="#cb50-121"></a></span>
+<span id="cb50-122"><a href="#cb50-122"></a><span class="in">video_games_deve %&gt;%</span></span>
+<span id="cb50-123"><a href="#cb50-123"></a><span class="in">  ggplot(aes(x = num_games, y = avg_price, size = num_games)) +</span></span>
+<span id="cb50-124"><a href="#cb50-124"></a><span class="in">  geom_point(alpha = 0.7) +</span></span>
+<span id="cb50-125"><a href="#cb50-125"></a><span class="in">  geom_smooth(se = FALSE, method = "lm", color = "red", show.legend = FALSE) +</span></span>
+<span id="cb50-126"><a href="#cb50-126"></a><span class="in">  scale_size_continuous(range = c(2, 10))+</span></span>
+<span id="cb50-127"><a href="#cb50-127"></a><span class="in">  labs(x = "Average Metascore", </span></span>
+<span id="cb50-128"><a href="#cb50-128"></a><span class="in">       y = "Average Price", </span></span>
+<span id="cb50-129"><a href="#cb50-129"></a><span class="in">       size = "Number of Games",</span></span>
+<span id="cb50-130"><a href="#cb50-130"></a><span class="in">       title = "Price relative to Metascore") +</span></span>
+<span id="cb50-131"><a href="#cb50-131"></a><span class="in">  theme_minimal()</span></span>
+<span id="cb50-132"><a href="#cb50-132"></a><span class="in">```</span></span>
+<span id="cb50-133"><a href="#cb50-133"></a></span>
+<span id="cb50-136"><a href="#cb50-136"></a><span class="in">```{r}</span></span>
+<span id="cb50-137"><a href="#cb50-137"></a><span class="co">#| fig-cap: "For each year, we take the average price of games that were released in this year"</span></span>
+<span id="cb50-138"><a href="#cb50-138"></a></span>
+<span id="cb50-139"><a href="#cb50-139"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb50-140"><a href="#cb50-140"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-141"><a href="#cb50-141"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb50-142"><a href="#cb50-142"></a>  <span class="fu">summarize</span>(<span class="at">avg_price =</span> <span class="fu">mean</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-143"><a href="#cb50-143"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-144"><a href="#cb50-144"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-145"><a href="#cb50-145"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-146"><a href="#cb50-146"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb50-147"><a href="#cb50-147"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_price, <span class="at">color =</span> avg_score)) <span class="sc">+</span></span>
+<span id="cb50-148"><a href="#cb50-148"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb50-149"><a href="#cb50-149"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb50-150"><a href="#cb50-150"></a>  <span class="fu">scale_color_viridis_c</span>(<span class="at">option =</span> <span class="st">"plasma"</span>)<span class="sc">+</span></span>
+<span id="cb50-151"><a href="#cb50-151"></a>  <span class="fu">labs</span>(</span>
+<span id="cb50-152"><a href="#cb50-152"></a>    <span class="at">title =</span> <span class="st">"Average Video Game Price Over Time"</span>,</span>
+<span id="cb50-153"><a href="#cb50-153"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb50-154"><a href="#cb50-154"></a>    <span class="at">y =</span> <span class="st">"Average Price"</span>,</span>
+<span id="cb50-155"><a href="#cb50-155"></a>    <span class="at">color =</span> <span class="st">"Average Metascore"</span></span>
+<span id="cb50-156"><a href="#cb50-156"></a>  ) <span class="sc">+</span></span>
+<span id="cb50-157"><a href="#cb50-157"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb50-158"><a href="#cb50-158"></a></span>
+<span id="cb50-159"><a href="#cb50-159"></a></span>
+<span id="cb50-160"><a href="#cb50-160"></a><span class="in">```</span></span>
+<span id="cb50-161"><a href="#cb50-161"></a></span>
+<span id="cb50-164"><a href="#cb50-164"></a><span class="in">```{r}</span></span>
+<span id="cb50-165"><a href="#cb50-165"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb50-166"><a href="#cb50-166"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-167"><a href="#cb50-167"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb50-168"><a href="#cb50-168"></a>  <span class="fu">summarize</span>(<span class="at">sum_price =</span> <span class="fu">sum</span>(price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-169"><a href="#cb50-169"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-170"><a href="#cb50-170"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb50-171"><a href="#cb50-171"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> sum_price)) <span class="sc">+</span></span>
+<span id="cb50-172"><a href="#cb50-172"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb50-173"><a href="#cb50-173"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb50-174"><a href="#cb50-174"></a>  <span class="fu">labs</span>(</span>
+<span id="cb50-175"><a href="#cb50-175"></a>    <span class="at">title =</span> <span class="st">"Total Video Game Price Over Time"</span>,</span>
+<span id="cb50-176"><a href="#cb50-176"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb50-177"><a href="#cb50-177"></a>    <span class="at">y =</span> <span class="st">"Total Price"</span></span>
+<span id="cb50-178"><a href="#cb50-178"></a>  ) <span class="sc">+</span></span>
+<span id="cb50-179"><a href="#cb50-179"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb50-180"><a href="#cb50-180"></a></span>
+<span id="cb50-181"><a href="#cb50-181"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb50-182"><a href="#cb50-182"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-183"><a href="#cb50-183"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb50-184"><a href="#cb50-184"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-185"><a href="#cb50-185"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-186"><a href="#cb50-186"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb50-187"><a href="#cb50-187"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> num_games)) <span class="sc">+</span></span>
+<span id="cb50-188"><a href="#cb50-188"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb50-189"><a href="#cb50-189"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb50-190"><a href="#cb50-190"></a>  <span class="fu">labs</span>(</span>
+<span id="cb50-191"><a href="#cb50-191"></a>    <span class="at">title =</span> <span class="st">"Number of Video Games Over Time"</span>,</span>
+<span id="cb50-192"><a href="#cb50-192"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb50-193"><a href="#cb50-193"></a>    <span class="at">y =</span> <span class="st">"Number of Games"</span></span>
+<span id="cb50-194"><a href="#cb50-194"></a>  ) <span class="sc">+</span></span>
+<span id="cb50-195"><a href="#cb50-195"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb50-196"><a href="#cb50-196"></a></span>
+<span id="cb50-197"><a href="#cb50-197"></a>video_games <span class="sc">%&gt;%</span></span>
+<span id="cb50-198"><a href="#cb50-198"></a>  <span class="fu">separate</span>(release_date, <span class="fu">c</span>(<span class="st">"month_date"</span>, <span class="st">"year"</span>), <span class="at">sep =</span> <span class="st">", "</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-199"><a href="#cb50-199"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb50-200"><a href="#cb50-200"></a>  <span class="fu">summarize</span>(<span class="at">num_games =</span> <span class="fu">n</span>(),</span>
+<span id="cb50-201"><a href="#cb50-201"></a>            <span class="at">avg_score =</span> <span class="fu">mean</span>(metascore, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb50-202"><a href="#cb50-202"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-203"><a href="#cb50-203"></a>  <span class="fu">na.omit</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb50-204"><a href="#cb50-204"></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.numeric</span>(year)) <span class="sc">%&gt;%</span> <span class="co"># Convert year to numeric</span></span>
+<span id="cb50-205"><a href="#cb50-205"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> avg_score)) <span class="sc">+</span></span>
+<span id="cb50-206"><a href="#cb50-206"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb50-207"><a href="#cb50-207"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb50-208"><a href="#cb50-208"></a>  <span class="fu">labs</span>(</span>
+<span id="cb50-209"><a href="#cb50-209"></a>    <span class="at">title =</span> <span class="st">"Average Metascore Over Time"</span>,</span>
+<span id="cb50-210"><a href="#cb50-210"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb50-211"><a href="#cb50-211"></a>    <span class="at">y =</span> <span class="st">"Score"</span></span>
+<span id="cb50-212"><a href="#cb50-212"></a>  ) <span class="sc">+</span></span>
+<span id="cb50-213"><a href="#cb50-213"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb50-214"><a href="#cb50-214"></a></span>
+<span id="cb50-215"><a href="#cb50-215"></a></span>
+<span id="cb50-216"><a href="#cb50-216"></a><span class="in">```</span></span>
+<span id="cb50-217"><a href="#cb50-217"></a></span>
+<span id="cb50-218"><a href="#cb50-218"></a><span class="at">&gt; The average price of game decrease since 2013, but the amount of games increased significantly</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
