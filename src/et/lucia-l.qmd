@@ -2,7 +2,7 @@
 title: "Lucia Luo"
 ---
 
-# The importance of teamwork (as proven by science)
+## The importance of teamwork (as proven by science)
 https://www.atlassian.com/blog/teamwork/the-importance-of-teamwork
 
 This article claims that effective teamwork offers significant benefits other than financial gains. Research shows that collaborative problem-solving leads to better outcomes. Collaborative efforts enable task division based on individual strengths, resulting in faster and more effective outcomes. People are more likely to take calculated risks that lead to innovation if they have the support of a team behind them. Working in a team encourages personal growth, increases job satisfaction, and reduces stress.

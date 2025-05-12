@@ -1,5 +1,5 @@
 ---
-title: "Lucia L"
+title: "Lucia Luo"
 editor: visual
 ---
 
@@ -28,7 +28,8 @@ head(video_games)
 
 ```
 
-> There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables). I ran tableby() before, but there are too many things so I didn't show the results.
+> There are 26,688 rows and 10 columns in this data (26,688 observations and 10 variables).
+> I ran tableby() before, but there are too many things so I didn't show the results.
 
 ```{r}
 #Plots
